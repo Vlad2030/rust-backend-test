@@ -112,7 +112,7 @@ async fn create_user(user: web::types::Json<CreateUser>) -> Result<web::HttpResp
         let mut _user: Option<&User> = None;
 
         let datetime: u32 = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH)
-                            .expect("Time went backwards")
+                            .expect("")
                             .as_secs()
                             as u32;
 
