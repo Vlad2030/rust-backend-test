@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+    backend:
+        container_name: ${BACKEND_CONTAINER_NAME}
+        build:
+            context: .
+            dockerfile: src/Dockerfile
+        depends_on:
+            - database
+        env_file:
+            - .env
+        ports:
+            - ${BACKEND_PORT}:${BACKEND_PORT}
+        restart: always
+        deploy:
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+
+    database:
+        container_name: ${DB_CONTAINER_NAME}
+        image: postgres:15
+        env_file:
+            - .env
+        ports:
+            - ${DB_CONTAINER_PORT}:${DB_CONTAINER_PORT}
+        volumes:
+            - postgres:/data/postgres
+
+volumes:
+    postgres:
