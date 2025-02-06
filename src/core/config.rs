@@ -45,7 +45,7 @@ impl Default for App {
     fn default() -> Self {
         Self {
             title: "rust-backend".into(),
-            version: "0.2.0".into(),
+            version: "0.3.0".into(),
             host: "localhost".into(),
             port: 6969,
             log_level: log::Level::Info,
