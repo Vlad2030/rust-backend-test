@@ -35,12 +35,11 @@ async fn main() -> std::io::Result<()> {
         ntex::web::App::new()
             .state(db_pool.clone().unwrap())
             .service((
-                api::health::healthcheck,
-                api::users::get_users,
-                api::users::get_user_by_id,
-                api::users::get_user_by_username,
-                api::users::create_user,
-                api::users::delete_user,
+                api::handlers::health::healthcheck,
+                api::handlers::users::get_users,
+                api::handlers::users::create_user,
+                api::handlers::users::delete_user,
+                api::handlers::users::update_user,
             ))
             .wrap(ntex::web::middleware::Logger::default())
     })
