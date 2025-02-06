@@ -95,12 +95,13 @@ impl ntex::web::error::WebResponseError for Error {
         _: &ntex::web::HttpRequest,
     ) -> ntex::web::HttpResponse {
         let status_code = self.status_code();
-        let error_response = models::ErrorResponse {
+        let error_response = models::response::error::Error {
             code: status_code.as_u16(),
             error: self.name(),
             message: self.to_string(),
         };
-        ntex::web::HttpResponse::build(status_code).json::<models::ErrorResponse>(&error_response)
+        ntex::web::HttpResponse::build(status_code)
+            .json::<models::response::error::Error>(&error_response)
     }
 }
 
